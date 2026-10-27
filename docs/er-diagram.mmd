@@ -1,0 +1,9 @@
+erDiagram
+ USERS ||--o| DOCTORS : profile
+ USERS ||--o{ CONSULTATIONS : patient
+ DOCTORS ||--o{ AVAILABILITY_SLOTS : offers
+ DOCTORS ||--o{ CONSULTATIONS : attends
+ AVAILABILITY_SLOTS ||--o| CONSULTATIONS : reserved_for
+ CONSULTATIONS ||--o{ PRESCRIPTIONS : includes
+ CONSULTATIONS ||--o{ PAYMENTS : has
+ USERS ||--o{ AUDIT_LOGS : triggers

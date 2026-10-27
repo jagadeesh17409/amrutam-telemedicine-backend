@@ -1,0 +1,15 @@
+sequenceDiagram
+ actor Patient
+ participant API as FastAPI
+ participant DB as PostgreSQL
+ Patient->>API: POST /bookings + Idempotency-Key
+ API->>DB: Check existing key
+ alt Existing key
+ DB-->>API: Existing consultation
+ API-->>Patient: Existing booking
+ else New key
+ API->>DB: Begin transaction and lock slot
+ API->>DB: Mark booked; insert consultation and audit
+ API->>DB: Commit
+ API-->>Patient: Booking response
+ end
